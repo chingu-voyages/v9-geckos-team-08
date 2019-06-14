@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MovieApp from './components/MovieApp';
+import MovieApp from './components/MovieApp/MovieApp';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<MovieApp />, document.getElementById('root'));
