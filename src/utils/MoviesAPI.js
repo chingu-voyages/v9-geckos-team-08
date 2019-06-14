@@ -13,8 +13,8 @@ const defaults = {
 }
 
 // get titles out in theatres
-const getPlayingNowTitles = async (page=1, type='/movie/now_playing') => {
-    let headers = {... defaults,
+export const getPlayingNowTitles = async (page=1, type='/movie/now_playing') => {
+    let headers = {...defaults,
                     page};
     let response = await axios({ url: `${API_URL}${type}`, params : headers})
 
@@ -22,7 +22,7 @@ const getPlayingNowTitles = async (page=1, type='/movie/now_playing') => {
 }
 
 // get detailed information on a title.
-const getDetailTitle =  async (movieID, api_type='/movie') => {
+export const getDetailTitle =  async (movieID, api_type='/movie') => {
     let header = {
         api_key : API_KEY,
         language: defaults['language']
@@ -34,4 +34,4 @@ const getDetailTitle =  async (movieID, api_type='/movie') => {
 }
 
 // builds link to poster
-const getPosterURL = (posterPath, size= 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
+export const getPosterURL = (posterPath, size= 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
