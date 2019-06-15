@@ -1,37 +1,39 @@
 const axios = require('axios');
-const CONFIG = require('./config')
+const CONFIG = require('./config');
 
 const API_URL = process.env.TMDB_API_URL || CONFIG.API_URL;
 const API_KEY = process.env.TMDB_API_KEY || CONFIG.API_KEY;
 
 const defaults = {
-    method : 'get',
-    api_key: API_KEY,
-    include_adult: false,
-    language : 'en-US',
-    region: 'us'
-}
+  method: 'get',
+  api_key: API_KEY,
+  include_adult: false,
+  language: 'en-US',
+  region: 'us',
+};
 
 // get titles out in theatres
-const getPlayingNowTitles = async (page=1, type='/movie/now_playing') => {
-    let headers = {... defaults,
-                    page};
-    let response = await axios({ url: `${API_URL}${type}`, params : headers})
+export const getPlayingNowTitles = async (page = 1, type = '/movie/now_playing') => {
+  const headers = { ...defaults, page };
+  const response = await axios({ url: `${API_URL}${type}`, params: headers });
 
-    return response.data.results;    
-}
+  return response.data.results;
+};
 
 // get detailed information on a title.
-const getDetailTitle =  async (movieID, api_type='/movie') => {
-    let header = {
-        api_key : API_KEY,
-        language: defaults['language']
-    }
-    let title = await axios({ url : `${API_URL}${api_type}/${movieID}`,
-                              params :header});
+export const getDetailTitle = async (movieID, apiType = '/movie') => {
+  const header = {
+    api_key: API_KEY,
+    language: defaults.language,
+  };
 
-    return title.data;
-}
+  const title = await axios({
+    url: `${API_URL}${apiType}/${movieID}`,
+    params: header,
+  });
+
+  return title.data;
+};
 
 // builds link to poster
-const getPosterURL = (posterPath, size= 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
+export const getPosterURL = (posterPath, size = 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
