@@ -37,3 +37,15 @@ export const getDetailTitle = async (movieID, apiType = '/movie') => {
 
 // builds link to poster
 export const getPosterURL = (posterPath, size = 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
+
+// return a list of search specific titles.
+export const getSpecificTitles = async (search_string) => {
+    const header = {
+        ...defaults,
+        query : search_string,
+    }
+
+    let data = await axios({url : `https://api.themoviedb.org/3/search/movie`,
+                            params : header})
+    return data.data.results;
+}
