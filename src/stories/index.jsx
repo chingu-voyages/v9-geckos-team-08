@@ -9,6 +9,7 @@ import { Button, Welcome } from '@storybook/react/demo';
 import MovieCard from '../components/MovieCard/MovieCard';
 import Trailer from '../components/Trailer/Trailer';
 import TrailerSection from '../components/TrailerSection/TrailerSection';
+import GenreFilter from '../components/GenreFilter/GenreFilter';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -58,6 +59,11 @@ storiesOf('Trailer', module)
         movieTitle="Hobbs & Shaw"
       />
     </div>
+  ));
+
+storiesOf('GenreFilter', module)
+  .add('Sample genre filter', () => (
+    <GenreFilter />
   ));
 
 storiesOf('TrailerSection', module)
