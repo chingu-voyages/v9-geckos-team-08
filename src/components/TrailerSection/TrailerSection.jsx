@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Trailer from '../Trailer/Trailer';
+import GenreFilter from '../GenreFilter/GenreFilter';
 
 const styles = theme => ({
   root: {
@@ -42,6 +43,7 @@ function TrailerSection(props) {
             <Typography variant="h5" component="h3" className={classes.title}>
               New Trailers
             </Typography>
+            <GenreFilter />
             <Grid container spacing={3} className={classes.trailerGrid}>
               <Grid item>
                 <Trailer trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg" movieTitle="Child's Play (2019 film)" />
