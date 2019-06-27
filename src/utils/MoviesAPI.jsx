@@ -51,3 +51,24 @@ export const getSpecificTitles = async (searchStr) => {
   });
   return data.data.results;
 };
+
+/*
+ * @func: query API for titles release after today(future releases).
+ *
+ * @param: page - default page 1, future features may need additional data.
+ *
+ * @return: array of objects.
+ *
+ * @Comment: API may query past titles. The filter prior to
+ *           the return will prevent past titles from
+ */
+export const getUpcomingTitles = async (page = 1) => {
+  const today = new Date();
+  const todayISOFormat = today.toISOFormat(); // "2019-06-26T19:06:26.942Z"
+  const todayISO = todayISOFormat.split('T')[0]; // "2019-06-26"
+
+  const response = await axios({
+    url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=${todayISO}&release_date.gte=${todayISO}`,
+  });
+  return response.data.results.filter(title => title.release_date >= todayISO);
+};
