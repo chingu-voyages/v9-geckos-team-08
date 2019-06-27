@@ -64,7 +64,7 @@ export const getSpecificTitles = async (searchStr) => {
  */
 export const getUpcomingTitles = async (page = 1) => {
   const today = new Date();
-  const todayISOFormat = today.toISOFormat(); // "2019-06-26T19:06:26.942Z"
+  const todayISOFormat = today.toISOString(); // "2019-06-26T19:06:26.942Z"
   const todayISO = todayISOFormat.split('T')[0]; // "2019-06-26"
 
   const response = await axios({
