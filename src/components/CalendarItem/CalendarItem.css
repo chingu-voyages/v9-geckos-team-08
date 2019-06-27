@@ -1,0 +1,20 @@
+.calendar-item {
+    padding:  5px 10px;
+    margin: 0 0;
+}
+
+.calendar-item:nth-child(1){
+    background-color: beige;
+}
+
+.calendar-item:hover {
+    background-color: lightblue;
+}
+
+a {
+    text-decoration: none;
+}
+
+#dates {
+    float: right;
+}
