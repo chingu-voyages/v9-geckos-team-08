@@ -3,7 +3,8 @@
  *
  *  @return: array of objects.
  */
-const sortTitleAsc = (titles) => {
+// eslint-disable-next-line import/prefer-default-export
+export const sortTitleAsc = (titles) => {
   const sortedTitles = titles;
 
   for (let i = 1; i < sortedTitles.length; i += 1) {
@@ -15,5 +16,3 @@ const sortTitleAsc = (titles) => {
   }
   return sortedTitles;
 };
-
-export default sortTitleAsc;
