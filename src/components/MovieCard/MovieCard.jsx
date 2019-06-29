@@ -12,6 +12,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const styles = theme => ({
   card: {
     maxWidth: 345,
+    marginTop: 20,
+    marginBottom: 20,
   },
   header: {
     textAlign: 'center',
