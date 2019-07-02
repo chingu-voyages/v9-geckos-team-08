@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -20,10 +21,10 @@ function Trailer(props) {
   const { classes, trailerThumbnail, movieTitle } = props;
 
   return (
-    <div>
+    <Grid item xs>
       <img className={classes.trailerThumbnail} src={trailerThumbnail} alt="trailer thumbnail" />
       <p className={classes.movieTitle}>{movieTitle}</p>
-    </div>
+    </Grid>
   );
 }
 
