@@ -34,7 +34,7 @@ const styles = theme => ({
 });
 
 function TrailerSection(props) {
-  const { classes } = props;
+  const { classes, upcomingTitles } = props;
 
   return (
     <div className={classes.root}>
@@ -44,14 +44,9 @@ function TrailerSection(props) {
         </Typography>
         <GenreFilter />
         <Grid container spacing={3} className={classes.trailerGrid}>
-          <Grid item>
-            <Trailer trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg" movieTitle="Child's Play (2019 film)" />
-            <Trailer trailerThumbnail="http://media.altpress.com/uploads/2019/01/spider-man-far-from-home-trailer-1.jpg" movieTitle="Spiderman Far From Home" />
-          </Grid>
-          <Grid item>
-            <Trailer trailerThumbnail="https://i.ytimg.com/vi/7TavVZMewpY/maxresdefault.jpg" movieTitle="The Lion King" />
-            <Trailer trailerThumbnail="https://i.ytimg.com/vi/5Lxu75r3-kI/maxresdefault.jpg" movieTitle="Hobbs & Shaw" />
-          </Grid>
+          {upcomingTitles.filter(title => title.backdrop_path !== null).slice(0, 4).map(title => (
+            <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} />
+          ))}
         </Grid>
         <div className={classes.buttonContainer}>
           <Button color="secondary" className={classes.button}>
@@ -66,6 +61,8 @@ function TrailerSection(props) {
 TrailerSection.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  upcomingTitles: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles)(TrailerSection);

@@ -66,8 +66,15 @@ storiesOf('GenreFilter', module)
     <GenreFilter />
   ));
 
+const upcomingTitles = [
+  { id: 1, backdrop_path: '/8DkJrxEyRN8gTseEhajybpC5smK.jpg', title: 'Child\'s Play (2019 film)' },
+  { id: 2, backdrop_path: '/dihW2yTsvQlust7mSuAqJDtqW7k.jpg', title: 'Spiderman Far From Home' },
+  { id: 3, backdrop_path: '/1TUg5pO1VZ4B0Q1amk3OlXvlpXV.jpg', title: 'The Lion King' },
+  { id: 4, backdrop_path: '/wsTZen8bAVhDnnFbcMdW6R3M8zL.jpg', title: 'Hobbs & Shaw' },
+];
+
 storiesOf('TrailerSection', module)
   .addParameters({ options: { theme: themes.dark } })
   .add('Sample trailer section', () => (
-    <TrailerSection />
+    <TrailerSection upcomingTitles={upcomingTitles} />
   ));
