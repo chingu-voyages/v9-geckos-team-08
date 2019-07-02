@@ -12,7 +12,7 @@ const SearchBar = ({ updateList }) => {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form className="SearchBar-Form" onSubmit={handleSubmit}>
         <input type="text" placeholder="Search" />
         <button id="search-button" type="submit" />
       </form>
