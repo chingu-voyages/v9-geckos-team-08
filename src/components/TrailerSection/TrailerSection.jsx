@@ -11,6 +11,7 @@ import GenreFilter from '../GenreFilter/GenreFilter';
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    marginLeft: 20,
   },
   paper: {
     padding: theme.spacing(2),
@@ -37,31 +38,27 @@ function TrailerSection(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} lg={4}>
-          <Paper className={classes.paper}>
-            <Typography variant="h5" component="h3" className={classes.title}>
-              New Trailers
-            </Typography>
-            <GenreFilter />
-            <Grid container spacing={3} className={classes.trailerGrid}>
-              <Grid item>
-                <Trailer trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg" movieTitle="Child's Play (2019 film)" />
-                <Trailer trailerThumbnail="http://media.altpress.com/uploads/2019/01/spider-man-far-from-home-trailer-1.jpg" movieTitle="Spiderman Far From Home" />
-              </Grid>
-              <Grid item>
-                <Trailer trailerThumbnail="https://i.ytimg.com/vi/7TavVZMewpY/maxresdefault.jpg" movieTitle="The Lion King" />
-                <Trailer trailerThumbnail="https://i.ytimg.com/vi/5Lxu75r3-kI/maxresdefault.jpg" movieTitle="Hobbs & Shaw" />
-              </Grid>
-            </Grid>
-            <div className={classes.buttonContainer}>
-              <Button color="secondary" className={classes.button}>
-                More trailers
-              </Button>
-            </div>
-          </Paper>
+      <Paper className={classes.paper}>
+        <Typography variant="h5" component="h3" className={classes.title}>
+          New Trailers
+        </Typography>
+        <GenreFilter />
+        <Grid container spacing={3} className={classes.trailerGrid}>
+          <Grid item>
+            <Trailer trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg" movieTitle="Child's Play (2019 film)" />
+            <Trailer trailerThumbnail="http://media.altpress.com/uploads/2019/01/spider-man-far-from-home-trailer-1.jpg" movieTitle="Spiderman Far From Home" />
+          </Grid>
+          <Grid item>
+            <Trailer trailerThumbnail="https://i.ytimg.com/vi/7TavVZMewpY/maxresdefault.jpg" movieTitle="The Lion King" />
+            <Trailer trailerThumbnail="https://i.ytimg.com/vi/5Lxu75r3-kI/maxresdefault.jpg" movieTitle="Hobbs & Shaw" />
+          </Grid>
         </Grid>
-      </Grid>
+        <div className={classes.buttonContainer}>
+          <Button color="secondary" className={classes.button}>
+            More trailers
+          </Button>
+        </div>
+      </Paper>
     </div>
   );
 }
