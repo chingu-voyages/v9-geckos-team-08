@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Grid from '@material-ui/core/Grid';
 import MovieCards from '../MovieCards/MovieCards';
 import * as TMDB from '../../utils/MoviesAPI';
 import SearchBar from '../SearchBar/SearchBar';
 import Calendar from '../Calendar/Calendar';
+import TrailerSection from '../TrailerSection/TrailerSection';
 import * as HELPERS from '../../utils/helpers';
 import './NextFlick.css';
-
 
 class NextFlick extends Component {
   constructor(props) {
@@ -40,7 +41,14 @@ class NextFlick extends Component {
       <div>
         <SearchBar updateList={this.updateList} />
         <MovieCards titles={titles} />
-        <Calendar upcomingTitles={upcomingTitles} />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} lg={4}>
+            <TrailerSection />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={8}>
+            <Calendar upcomingTitles={upcomingTitles} />
+          </Grid>
+        </Grid>
       </div>
     );
   }

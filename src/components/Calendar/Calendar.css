@@ -1,13 +1,13 @@
 .itemize-titles {
-    width: 40%;
     border: 1px solid black;
-    float: right;
     padding: 0;
+    margin-right: 20px;
 }
 
 h1 {
     text-align: center;
 }
+
 ul {
     list-style-type:none;
     padding: 0;
