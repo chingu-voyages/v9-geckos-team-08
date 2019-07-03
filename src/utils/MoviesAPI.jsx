@@ -70,5 +70,16 @@ export const getUpcomingTitles = async (page = 1) => {
   const response = await axios({
     url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=${todayISO}&release_date.gte=${todayISO}`,
   });
-  return response.data.results.filter(title => title.release_date >= todayISO);
+
+  const upcomingTitles = response.data.results.filter(title => title.release_date >= todayISO);
+
+  await Promise.all(upcomingTitles.map(async (title) => {
+    const titleID = title.id;
+    const videosResponse = await axios({
+      url: `https://api.themoviedb.org/3/movie/${titleID}/videos?api_key=${API_KEY}`,
+    });
+    title.videos = videosResponse.data.results; // eslint-disable-line no-param-reassign
+  }));
+
+  return upcomingTitles;
 };

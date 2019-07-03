@@ -43,7 +43,7 @@ class NextFlick extends Component {
         <MovieCards titles={titles} />
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} lg={4}>
-            <TrailerSection />
+            <TrailerSection upcomingTitles={upcomingTitles} />
           </Grid>
           <Grid item xs={12} sm={6} lg={8}>
             <Calendar upcomingTitles={upcomingTitles} />

@@ -45,7 +45,7 @@ function TrailerSection(props) {
         <GenreFilter />
         <Grid container spacing={3} className={classes.trailerGrid}>
           {upcomingTitles.filter(title => title.backdrop_path !== null).slice(0, 4).map(title => (
-            <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} />
+            <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />
           ))}
         </Grid>
         <div className={classes.buttonContainer}>
