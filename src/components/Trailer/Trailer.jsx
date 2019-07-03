@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -15,10 +16,19 @@ const styles = theme => ({
     color: '#FAFAFA',
     ...theme.typography.caption,
   },
+  modal: {
+    width: '50vw',
+    height: '50vh',
+    transform: 'translate(50%, 50%)',
+  },
+  youtubeIframe: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
 function assignYoutubeTrailer(videos) {
-  const YOUTUBE_URLBASE = 'https://youtube.com/watch?v=';
+  const YOUTUBE_URLBASE = 'https://www.youtube.com/embed/';
 
   if (videos.length === 0) {
     return '';
@@ -47,10 +57,41 @@ function Trailer(props) {
     videos,
   } = props;
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Grid item xs>
-      <a href={assignYoutubeTrailer(videos)}><img className={classes.trailerThumbnail} src={trailerThumbnail} alt="trailer thumbnail" /></a>
+      <input
+        type="image"
+        className={classes.trailerThumbnail}
+        src={trailerThumbnail}
+        onClick={handleOpen}
+        alt="trailer thumbnail"
+      />
       <p className={classes.movieTitle}>{movieTitle}</p>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <div className={classes.modal}>
+          <iframe
+            src={assignYoutubeTrailer(videos)}
+            className={classes.youtubeIframe}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="video"
+          />
+        </div>
+      </Modal>
     </Grid>
   );
 }
