@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MovieCards from '../MovieCards/MovieCards';
 import * as TMDB from '../../utils/MoviesAPI';
+import NavBar from '../NavBar/NavBar';
 import SearchBar from '../SearchBar/SearchBar';
 import Calendar from '../Calendar/Calendar';
 import TrailerSection from '../TrailerSection/TrailerSection';
@@ -13,7 +14,6 @@ import './NextFlick.css';
 const styles = theme => ({
   NextFlick: {
     backgroundColor: theme.palette.primary.main,
-    paddingTop: 50,
   },
 });
 
@@ -49,6 +49,7 @@ class NextFlick extends Component {
 
     return (
       <div className={classes.NextFlick}>
+        <NavBar />
         <SearchBar updateList={this.updateList} />
         <MovieCards titles={titles} />
         <Grid container>
