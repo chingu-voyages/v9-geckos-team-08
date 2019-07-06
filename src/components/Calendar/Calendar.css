@@ -6,6 +6,10 @@
 
 h1 {
     text-align: center;
+    color: #FFF;
+    background-color: #2E5EAA;
+    margin: 0;
+    padding: 20px;
 }
 
 ul {

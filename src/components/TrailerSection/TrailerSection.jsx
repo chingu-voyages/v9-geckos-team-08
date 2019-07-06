@@ -12,12 +12,11 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     marginLeft: 20,
+    marginRight: 20,
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: '#FAFAFA',
-    backgroundColor: '#424342',
   },
   title: {
     marginBottom: 30,
@@ -49,7 +48,7 @@ function TrailerSection(props) {
           ))}
         </Grid>
         <div className={classes.buttonContainer}>
-          <Button color="secondary" className={classes.button}>
+          <Button className={classes.button}>
             More trailers
           </Button>
         </div>

@@ -13,7 +13,6 @@ const styles = theme => ({
   movieTitle: {
     margin: 0,
     marginBottom: 20,
-    color: '#FAFAFA',
     ...theme.typography.caption,
   },
   modal: {
