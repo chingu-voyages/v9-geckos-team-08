@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 function GenreFilter(props) {
-  const { classes } = props;
+  const { classes, genres } = props;
 
   const [values, setValues] = React.useState({
     genre: '',
@@ -50,18 +50,9 @@ function GenreFilter(props) {
           }}
         >
           <MenuItem value="">None</MenuItem>
-          <MenuItem value="Action">Action</MenuItem>
-          <MenuItem value="Adventure">Adventure</MenuItem>
-          <MenuItem value="Comedy">Comedy</MenuItem>
-          <MenuItem value="Crime">Crime</MenuItem>
-          <MenuItem value="Drama">Drama</MenuItem>
-          <MenuItem value="Fantasy">Fantasy</MenuItem>
-          <MenuItem value="Historical">Historical</MenuItem>
-          <MenuItem value="Horror">Horror</MenuItem>
-          <MenuItem value="Mistery">Mistery</MenuItem>
-          <MenuItem value="Romance">Romance</MenuItem>
-          <MenuItem value="Science Fiction">Science Fiction</MenuItem>
-          <MenuItem value="Thriller">Thriller</MenuItem>
+          {genres.map(genre => (
+            <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>
+          ))}
         </Select>
       </FormControl>
     </form>
@@ -71,6 +62,10 @@ function GenreFilter(props) {
 GenreFilter.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default withStyles(styles)(GenreFilter);

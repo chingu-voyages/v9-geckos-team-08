@@ -33,7 +33,7 @@ const styles = theme => ({
 });
 
 function TrailerSection(props) {
-  const { classes, upcomingTitles } = props;
+  const { classes, genres, upcomingTitles } = props;
 
   return (
     <div className={classes.root}>
@@ -41,7 +41,7 @@ function TrailerSection(props) {
         <Typography variant="h5" component="h3" className={classes.title}>
           New Trailers
         </Typography>
-        <GenreFilter />
+        <GenreFilter genres={genres} />
         <Grid container spacing={3} className={classes.trailerGrid}>
           {upcomingTitles.filter(title => title.backdrop_path !== null).slice(0, 4).map(title => (
             <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />
@@ -62,6 +62,10 @@ TrailerSection.propTypes = {
   classes: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   upcomingTitles: PropTypes.array.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default withStyles(styles)(TrailerSection);

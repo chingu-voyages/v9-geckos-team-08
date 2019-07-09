@@ -14,6 +14,20 @@ const defaults = {
   region: 'us',
 };
 
+// get genre list object (with IDs)
+export const getGenreList = async () => {
+  const header = {
+    ...defaults,
+  };
+
+  const response = await axios({
+    url: 'https://api.themoviedb.org/3/genre/movie/list',
+    params: header,
+  });
+
+  return response.data.genres;
+};
+
 // get titles out in theatres
 export const getPlayingNowTitles = async (page = 1, type = '/movie/now_playing') => {
   const headers = { ...defaults, page };

@@ -4,6 +4,12 @@ import GenreFilter from './GenreFilter';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<GenreFilter />, div);
+  const genres = [
+    {
+      id: 1,
+      name: 'Action',
+    },
+  ];
+  ReactDOM.render(<GenreFilter genres={genres} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

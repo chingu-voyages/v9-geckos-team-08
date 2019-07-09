@@ -4,6 +4,12 @@ import TrailerSection from './TrailerSection';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<TrailerSection upcomingTitles={[]} />, div);
+  const genres = [
+    {
+      id: 1,
+      name: 'Action',
+    },
+  ];
+  ReactDOM.render(<TrailerSection upcomingTitles={[]} genres={genres} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
