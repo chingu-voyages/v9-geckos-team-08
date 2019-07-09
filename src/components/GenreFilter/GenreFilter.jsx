@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    color: '#FAFAFA',
     marginBottom: 20,
   },
   formControl: {
@@ -19,7 +18,6 @@ const styles = theme => ({
   },
   select: {
     width: 300,
-    color: '#FAFAFA',
   },
 });
 
