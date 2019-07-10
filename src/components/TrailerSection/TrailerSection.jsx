@@ -32,6 +32,21 @@ const styles = theme => ({
   },
 });
 
+function renderTrailers(titles, genres, selectedGenre) {
+  const filterCondition = selectedGenre === ''
+    ? title => title.backdrop_path !== null
+    : (title) => {
+      const genreID = genres.filter(genre => genre.name === selectedGenre)[0].id;
+      return title.backdrop_path !== null && title.genre_ids.includes(genreID);
+    };
+
+  return titles
+    .filter(filterCondition).slice(0, 4)
+    .map(title => (
+      <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />
+    ));
+}
+
 function TrailerSection(props) {
   const { classes, genres, upcomingTitles } = props;
 
@@ -58,9 +73,7 @@ function TrailerSection(props) {
           handleGenreChange={handleGenreChange}
         />
         <Grid container spacing={3} className={classes.trailerGrid}>
-          {upcomingTitles.filter(title => title.backdrop_path !== null).slice(0, 4).map(title => (
-            <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />
-          ))}
+          {renderTrailers(upcomingTitles, genres, values.selectedGenre)}
         </Grid>
         <div className={classes.buttonContainer}>
           <Button className={classes.button}>
