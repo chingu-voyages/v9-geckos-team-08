@@ -35,13 +35,28 @@ const styles = theme => ({
 function TrailerSection(props) {
   const { classes, genres, upcomingTitles } = props;
 
+  const [values, setValues] = React.useState({
+    selectedGenre: '',
+  });
+
+  function handleGenreChange(event) {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h5" component="h3" className={classes.title}>
           New Trailers
         </Typography>
-        <GenreFilter genres={genres} />
+        <GenreFilter
+          genres={genres}
+          selectedGenre={values.selectedGenre}
+          handleGenreChange={handleGenreChange}
+        />
         <Grid container spacing={3} className={classes.trailerGrid}>
           {upcomingTitles.filter(title => title.backdrop_path !== null).slice(0, 4).map(title => (
             <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />

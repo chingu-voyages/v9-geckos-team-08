@@ -22,17 +22,15 @@ const styles = theme => ({
 });
 
 function GenreFilter(props) {
-  const { classes, genres } = props;
-
-  const [values, setValues] = React.useState({
-    genre: '',
-  });
+  const {
+    classes,
+    genres,
+    selectedGenre,
+    handleGenreChange,
+  } = props;
 
   function handleChange(event) {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
+    handleGenreChange(event);
   }
 
   return (
@@ -40,12 +38,12 @@ function GenreFilter(props) {
       <span>Filter by Genre</span>
       <FormControl className={classes.formControl}>
         <Select
-          value={values.genre}
+          value={selectedGenre}
           onChange={handleChange}
           className={classes.select}
           displayEmpty
           inputProps={{
-            name: 'genre',
+            name: 'selectedGenre',
             id: 'genre-select',
           }}
         >
@@ -66,6 +64,8 @@ GenreFilter.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
+  selectedGenre: PropTypes.string.isRequired,
+  handleGenreChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(GenreFilter);
