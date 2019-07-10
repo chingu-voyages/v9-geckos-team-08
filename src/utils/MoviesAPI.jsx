@@ -1,3 +1,5 @@
+import { removeDuplicates } from './helpers';
+
 const axios = require('axios');
 const CONFIG = require('./config');
 
@@ -17,7 +19,7 @@ export const getPlayingNowTitles = async (page = 1, type = '/movie/now_playing')
   const headers = { ...defaults, page };
   const response = await axios({ url: `${API_URL}${type}`, params: headers });
 
-  return response.data.results;
+  return removeDuplicates(response.data.results, 'id');
 };
 
 // get detailed information on a title.
@@ -81,5 +83,5 @@ export const getUpcomingTitles = async (page = 1) => {
     title.videos = videosResponse.data.results; // eslint-disable-line no-param-reassign
   }));
 
-  return upcomingTitles;
+  return removeDuplicates(upcomingTitles, 'id');
 };

@@ -3,7 +3,6 @@
  *
  *  @return: array of objects.
  */
-// eslint-disable-next-line import/prefer-default-export
 export const sortTitleAsc = (titles) => {
   const sortedTitles = titles;
 
@@ -15,4 +14,24 @@ export const sortTitleAsc = (titles) => {
     }
   }
   return sortedTitles;
+};
+
+/*
+ *  @func: removes duplicates in array of objects based on unique prop
+ *
+ *  @return: array of objects.
+ */
+export const removeDuplicates = (originalArray, prop) => {
+  const newArray = [];
+  const lookupObject = {};
+
+  for (let ind = 0; ind < originalArray.length; ind += 1) {
+    lookupObject[originalArray[ind][prop]] = originalArray[ind];
+  }
+
+  Object.keys(lookupObject).forEach((key) => {
+    newArray.push(lookupObject[key]);
+  });
+
+  return newArray;
 };
