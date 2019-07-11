@@ -1,0 +1,23 @@
+.itemize-titles {
+    border: 1px solid black;
+    padding: 0;
+    margin-right: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #FFF;
+    background-color: #2E5EAA;
+    margin: 0;
+    padding: 20px;
+}
+
+ul {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
