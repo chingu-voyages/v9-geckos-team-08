@@ -23,6 +23,7 @@ class NextFlick extends Component {
     this.state = {
       titles: [],
       upcomingTitles: [],
+      genres: [],
     };
     this.updateList = this.updateList.bind(this);
   }
@@ -36,6 +37,9 @@ class NextFlick extends Component {
     TMDB.getUpcomingTitles()
       .then(HELPERS.sortTitleAsc)
       .then(data => this.setState({ upcomingTitles: data }));
+
+    TMDB.getGenreList()
+      .then(data => this.setState({ genres: data }));
   }
 
   updateList(search) {
@@ -44,7 +48,7 @@ class NextFlick extends Component {
   }
 
   render() {
-    const { titles, upcomingTitles } = this.state;
+    const { genres, titles, upcomingTitles } = this.state;
     const { classes } = this.props;
 
     return (
@@ -54,7 +58,7 @@ class NextFlick extends Component {
         <MovieCards titles={titles} />
         <Grid container>
           <Grid item xs={12} sm={6} lg={4}>
-            <TrailerSection upcomingTitles={upcomingTitles} />
+            <TrailerSection upcomingTitles={upcomingTitles} genres={genres} />
           </Grid>
           <Grid item xs={12} sm={6} lg={8}>
             <Calendar upcomingTitles={upcomingTitles} />

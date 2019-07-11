@@ -22,17 +22,15 @@ const styles = theme => ({
 });
 
 function GenreFilter(props) {
-  const { classes } = props;
-
-  const [values, setValues] = React.useState({
-    genre: '',
-  });
+  const {
+    classes,
+    genres,
+    selectedGenre,
+    handleGenreChange,
+  } = props;
 
   function handleChange(event) {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
+    handleGenreChange(event);
   }
 
   return (
@@ -40,28 +38,19 @@ function GenreFilter(props) {
       <span>Filter by Genre</span>
       <FormControl className={classes.formControl}>
         <Select
-          value={values.genre}
+          value={selectedGenre}
           onChange={handleChange}
           className={classes.select}
           displayEmpty
           inputProps={{
-            name: 'genre',
+            name: 'selectedGenre',
             id: 'genre-select',
           }}
         >
           <MenuItem value="">None</MenuItem>
-          <MenuItem value="Action">Action</MenuItem>
-          <MenuItem value="Adventure">Adventure</MenuItem>
-          <MenuItem value="Comedy">Comedy</MenuItem>
-          <MenuItem value="Crime">Crime</MenuItem>
-          <MenuItem value="Drama">Drama</MenuItem>
-          <MenuItem value="Fantasy">Fantasy</MenuItem>
-          <MenuItem value="Historical">Historical</MenuItem>
-          <MenuItem value="Horror">Horror</MenuItem>
-          <MenuItem value="Mistery">Mistery</MenuItem>
-          <MenuItem value="Romance">Romance</MenuItem>
-          <MenuItem value="Science Fiction">Science Fiction</MenuItem>
-          <MenuItem value="Thriller">Thriller</MenuItem>
+          {genres.map(genre => (
+            <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>
+          ))}
         </Select>
       </FormControl>
     </form>
@@ -71,6 +60,12 @@ function GenreFilter(props) {
 GenreFilter.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+  selectedGenre: PropTypes.string.isRequired,
+  handleGenreChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(GenreFilter);
