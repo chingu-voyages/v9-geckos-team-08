@@ -14,6 +14,4 @@ Web application displays recently release movies, the user may click a title to 
 * Javascript - [Airbnb](https://github.com/airbnb/javascript)
 
 ## Changelog 
-[![Build Status](https://travis-ci.org/auxibackup/v9-geckos-team-08.svg?branch=master)]
-(https://travis-ci.org/auxibackup/v9-geckos-team-08)
-
+[![Build Status](https://travis-ci.org/chingu-voyages/v9-geckos-team-08.svg?branch=master)](https://travis-ci.org/chingu-voyages/v9-geckos-team-08)
