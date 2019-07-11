@@ -3,8 +3,8 @@ import { removeDuplicates } from './helpers';
 const axios = require('axios');
 const CONFIG = require('./config');
 
-const API_URL = process.env.TMDB_API_URL || CONFIG.API_URL;
-const API_KEY = process.env.TMDB_API_KEY || CONFIG.API_KEY;
+const API_URL = process.env.REACT_APP_TMDB_API_URL || CONFIG.API_URL;
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY || CONFIG.API_KEY;
 
 const defaults = {
   method: 'get',
