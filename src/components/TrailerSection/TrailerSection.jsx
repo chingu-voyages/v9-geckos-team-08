@@ -43,7 +43,12 @@ function renderTrailers(titles, genres, selectedGenre) {
   return titles
     .filter(filterCondition).slice(0, 4)
     .map(title => (
-      <Trailer key={title.id} trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`} movieTitle={title.title} videos={title.videos} />
+      <Trailer
+        key={title.id}
+        titleID={title.id}
+        trailerThumbnail={`https://image.tmdb.org/t/p/w300${title.backdrop_path}`}
+        movieTitle={title.title}
+      />
     ));
 }
 

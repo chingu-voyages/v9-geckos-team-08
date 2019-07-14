@@ -89,13 +89,21 @@ export const getUpcomingTitles = async (page = 1) => {
 
   const upcomingTitles = response.data.results.filter(title => title.release_date >= todayISO);
 
-  await Promise.all(upcomingTitles.map(async (title) => {
-    const titleID = title.id;
-    const videosResponse = await axios({
-      url: `https://api.themoviedb.org/3/movie/${titleID}/videos?api_key=${API_KEY}`,
-    });
-    title.videos = videosResponse.data.results; // eslint-disable-line no-param-reassign
-  }));
-
   return removeDuplicates(upcomingTitles, 'id');
+};
+
+/*
+ * @func: get videos (trailers, teasers) related to movie using titleID
+ *
+ * @param: titleID - from TheMovieDB API
+ *
+ * @return: array of objects.
+ *
+ */
+export const getVideosFromMovie = async (titleID) => {
+  const videosResponse = await axios({
+    url: `https://api.themoviedb.org/3/movie/${titleID}/videos?api_key=${API_KEY}`,
+  });
+
+  return videosResponse.data.results;
 };
