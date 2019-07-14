@@ -18,6 +18,13 @@ ul {
     margin: 0;
 }
 
+ul.pagination {
+    color: #FFF;
+    display: inline-block;
+}
 
-
-
+ul.pagination li {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}

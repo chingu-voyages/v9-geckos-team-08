@@ -87,9 +87,10 @@ export const getUpcomingTitles = async (page = 1) => {
     url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=${todayISO}&release_date.gte=${todayISO}`,
   });
 
+  const totalPages = response.data.total_pages;
   const upcomingTitles = response.data.results.filter(title => title.release_date >= todayISO);
 
-  return removeDuplicates(upcomingTitles, 'id');
+  return { results: removeDuplicates(upcomingTitles, 'id'), totalPages };
 };
 
 /*
