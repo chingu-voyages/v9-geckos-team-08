@@ -18,6 +18,32 @@ ul {
     margin: 0;
 }
 
+ul.pagination {
+    background-color: #2E5EAA;
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+ul.pagination li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+    user-select: none;
+}
 
+ul.pagination li>a {
+    outline: 0;
+}
 
+ul.pagination li.active {
+    font-weight: bold;
+    border-bottom: 1px solid;
+}

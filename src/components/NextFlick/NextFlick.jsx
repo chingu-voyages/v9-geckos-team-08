@@ -24,8 +24,10 @@ class NextFlick extends Component {
       titles: [],
       upcomingTitles: [],
       genres: [],
+      upcomingTitlesPageCount: 0,
     };
     this.updateList = this.updateList.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +37,10 @@ class NextFlick extends Component {
 
     // get upcoming titles
     TMDB.getUpcomingTitles()
+      .then((data) => {
+        this.setState({ upcomingTitlesPageCount: data.totalPages });
+        return data.results;
+      })
       .then(HELPERS.sortTitleAsc)
       .then(data => this.setState({ upcomingTitles: data }));
 
@@ -47,8 +53,20 @@ class NextFlick extends Component {
       .then(data => this.setState({ titles: data }));
   }
 
+  handlePageChange(event) {
+    TMDB.getUpcomingTitles(event.selected + 1)
+      .then(data => data.results)
+      .then(HELPERS.sortTitleAsc)
+      .then(data => this.setState({ upcomingTitles: data }));
+  }
+
   render() {
-    const { genres, titles, upcomingTitles } = this.state;
+    const {
+      genres,
+      titles,
+      upcomingTitles,
+      upcomingTitlesPageCount,
+    } = this.state;
     const { classes } = this.props;
 
     return (
@@ -61,7 +79,11 @@ class NextFlick extends Component {
             <TrailerSection upcomingTitles={upcomingTitles} genres={genres} />
           </Grid>
           <Grid item xs={12} sm={6} lg={8}>
-            <Calendar upcomingTitles={upcomingTitles} />
+            <Calendar
+              upcomingTitles={upcomingTitles}
+              pageCount={upcomingTitlesPageCount}
+              handlePageChange={this.handlePageChange}
+            />
           </Grid>
         </Grid>
       </div>
