@@ -14,7 +14,7 @@ const Calender = ({ upcomingTitles, pageCount, handlePageChange }) => {
       <h1>Upcoming Releases</h1>
       <ul>
         {upcomingTitles.map(title => (
-          <CalendarItem key={title.id} title={title} />
+          <CalendarItem key={title.id} titleID={title.id} title={title} />
         ))}
       </ul>
       <ReactPaginate
