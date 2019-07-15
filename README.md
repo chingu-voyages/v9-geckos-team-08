@@ -1,5 +1,5 @@
 ## Movie-app
-Web application displays recently release movies, the user may click a title to expand the description of the movie. Additional trailers and movies of upcoming movies to display below. 
+Web application that displays recently released movies and trailers for upcoming movies. By clicking on the trailer thumbnails or on the calendar items, users can watch the trailers.
 
 ## Technology
 #### Frontend
