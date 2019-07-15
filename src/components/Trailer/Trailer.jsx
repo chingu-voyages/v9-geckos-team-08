@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
+import { getVideosFromMovie } from '../../utils/MoviesAPI';
+import * as HELPERS from '../../utils/helpers';
 
 const styles = theme => ({
   trailerThumbnail: {
@@ -26,34 +28,12 @@ const styles = theme => ({
   },
 });
 
-function assignYoutubeTrailer(videos) {
-  const YOUTUBE_URLBASE = 'https://www.youtube.com/embed/';
-
-  if (videos.length === 0) {
-    return '';
-  }
-
-  const validVideos = videos.filter(video => video.site.toLowerCase() === 'youtube');
-  const trailers = validVideos.filter(video => video.type.toLowerCase() === 'trailer');
-  const teasers = validVideos.filter(video => video.type.toLowerCase() === 'teaser');
-
-  if (trailers.length !== 0) {
-    return YOUTUBE_URLBASE + trailers[0].key;
-  }
-
-  if (teasers.length !== 0) {
-    return YOUTUBE_URLBASE + teasers[0].key;
-  }
-
-  return '';
-}
-
 function Trailer(props) {
   const {
     classes,
+    titleID,
     trailerThumbnail,
     movieTitle,
-    videos,
   } = props;
 
   const [open, setOpen] = React.useState(false);
@@ -65,6 +45,13 @@ function Trailer(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [videos, setVideos] = React.useState('');
+
+  React.useEffect(() => {
+    getVideosFromMovie(titleID)
+      .then(candidateVideos => setVideos(HELPERS.assignYoutubeTrailer(candidateVideos)));
+  }, [titleID]);
 
   return (
     <Grid item xs>
@@ -82,7 +69,7 @@ function Trailer(props) {
       >
         <div className={classes.modal}>
           <iframe
-            src={assignYoutubeTrailer(videos)}
+            src={videos}
             className={classes.youtubeIframe}
             frameBorder="0"
             allow="autoplay; encrypted-media"
@@ -98,10 +85,9 @@ function Trailer(props) {
 Trailer.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+  titleID: PropTypes.number.isRequired,
   trailerThumbnail: PropTypes.string.isRequired,
   movieTitle: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  videos: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles)(Trailer);
