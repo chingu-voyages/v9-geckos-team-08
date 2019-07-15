@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import { getVideosFromMovie } from '../../utils/MoviesAPI';
+import * as HELPERS from '../../utils/helpers';
 
 const styles = theme => ({
   trailerThumbnail: {
@@ -27,28 +28,6 @@ const styles = theme => ({
   },
 });
 
-function assignYoutubeTrailer(videos) {
-  const YOUTUBE_URLBASE = 'https://www.youtube.com/embed/';
-
-  if (videos.length === 0) {
-    return '';
-  }
-
-  const validVideos = videos.filter(video => video.site.toLowerCase() === 'youtube');
-  const trailers = validVideos.filter(video => video.type.toLowerCase() === 'trailer');
-  const teasers = validVideos.filter(video => video.type.toLowerCase() === 'teaser');
-
-  if (trailers.length !== 0) {
-    return YOUTUBE_URLBASE + trailers[0].key;
-  }
-
-  if (teasers.length !== 0) {
-    return YOUTUBE_URLBASE + teasers[0].key;
-  }
-
-  return '';
-}
-
 function Trailer(props) {
   const {
     classes,
@@ -71,7 +50,7 @@ function Trailer(props) {
 
   React.useEffect(() => {
     getVideosFromMovie(titleID)
-      .then(candidateVideos => setVideos(assignYoutubeTrailer(candidateVideos)));
+      .then(candidateVideos => setVideos(HELPERS.assignYoutubeTrailer(candidateVideos)));
   }, [titleID]);
 
   return (
