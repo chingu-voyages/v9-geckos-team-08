@@ -1,19 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import GenreFilter from './GenreFilter';
+import React from "react";
+import ReactDOM from "react-dom";
+import GenreFilter from "./GenreFilter";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
 
   const genres = [
     {
       id: 1,
-      name: 'Action',
-    },
+      name: "Action"
+    }
   ];
 
-  const handleGenreChange = () => 'This is a stub';
+  const handleGenreChange = () => "This is a stub";
 
-  ReactDOM.render(<GenreFilter genres={genres} selectedGenre="" handleGenreChange={handleGenreChange} />, div);
+  ReactDOM.render(
+    <GenreFilter
+      genres={genres}
+      selectedGenre=""
+      handleGenreChange={handleGenreChange}
+    />,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

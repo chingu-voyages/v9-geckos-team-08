@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import MovieCards from '../MovieCards/MovieCards';
-import * as TMDB from '../../utils/MoviesAPI';
-import NavBar from '../NavBar/NavBar';
-import SearchBar from '../SearchBar/SearchBar';
-import Calendar from '../Calendar/Calendar';
-import TrailerSection from '../TrailerSection/TrailerSection';
-import * as HELPERS from '../../utils/helpers';
-import './NextFlick.css';
+import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import MovieCards from "../MovieCards/MovieCards";
+import * as TMDB from "../../utils/MoviesAPI";
+import NavBar from "../NavBar/NavBar";
+import SearchBar from "../SearchBar/SearchBar";
+import Calendar from "../Calendar/Calendar";
+import TrailerSection from "../TrailerSection/TrailerSection";
+import * as HELPERS from "../../utils/helpers";
+import "./NextFlick.css";
 
 const styles = theme => ({
   NextFlick: {
-    backgroundColor: theme.palette.primary.main,
-  },
+    backgroundColor: theme.palette.primary.main
+  }
 });
 
 class NextFlick extends Component {
@@ -24,7 +24,7 @@ class NextFlick extends Component {
       titles: [],
       upcomingTitles: [],
       genres: [],
-      upcomingTitlesPageCount: 0,
+      upcomingTitlesPageCount: 0
     };
     this.updateList = this.updateList.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -32,25 +32,24 @@ class NextFlick extends Component {
 
   componentDidMount() {
     // get latest titles on load.
-    TMDB.getPlayingNowTitles()
-      .then(data => this.setState({ titles: data }));
+    TMDB.getPlayingNowTitles().then(data => this.setState({ titles: data }));
 
     // get upcoming titles
     TMDB.getUpcomingTitles()
-      .then((data) => {
+      .then(data => {
         this.setState({ upcomingTitlesPageCount: data.totalPages });
         return data.results;
       })
       .then(HELPERS.sortTitleAsc)
       .then(data => this.setState({ upcomingTitles: data }));
 
-    TMDB.getGenreList()
-      .then(data => this.setState({ genres: data }));
+    TMDB.getGenreList().then(data => this.setState({ genres: data }));
   }
 
   updateList(search) {
-    TMDB.getSpecificTitles(search)
-      .then(data => this.setState({ titles: data }));
+    TMDB.getSpecificTitles(search).then(data =>
+      this.setState({ titles: data })
+    );
   }
 
   handlePageChange(event) {
@@ -65,7 +64,7 @@ class NextFlick extends Component {
       genres,
       titles,
       upcomingTitles,
-      upcomingTitlesPageCount,
+      upcomingTitlesPageCount
     } = this.state;
     const { classes } = this.props;
 
@@ -93,7 +92,7 @@ class NextFlick extends Component {
 
 NextFlick.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(NextFlick);

@@ -1,69 +1,73 @@
-import { removeDuplicates } from './helpers';
+import { removeDuplicates } from "./helpers";
 
-const axios = require('axios');
-const CONFIG = require('./config');
+const axios = require("axios");
+const CONFIG = require("./config");
 
 const API_URL = process.env.REACT_APP_TMDB_API_URL || CONFIG.API_URL;
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY || CONFIG.API_KEY;
 
 const defaults = {
-  method: 'get',
+  method: "get",
   api_key: API_KEY,
   include_adult: false,
-  language: 'en-US',
-  region: 'us',
+  language: "en-US",
+  region: "us"
 };
 
 // get genre list object (with IDs)
 export const getGenreList = async () => {
   const header = {
-    ...defaults,
+    ...defaults
   };
 
   const response = await axios({
-    url: 'https://api.themoviedb.org/3/genre/movie/list',
-    params: header,
+    url: "https://api.themoviedb.org/3/genre/movie/list",
+    params: header
   });
 
   return response.data.genres;
 };
 
 // get titles out in theatres
-export const getPlayingNowTitles = async (page = 1, type = '/movie/now_playing') => {
+export const getPlayingNowTitles = async (
+  page = 1,
+  type = "/movie/now_playing"
+) => {
   const headers = { ...defaults, page };
   const response = await axios({ url: `${API_URL}${type}`, params: headers });
 
-  return removeDuplicates(response.data.results, 'id');
+  return removeDuplicates(response.data.results, "id");
 };
 
 // get detailed information on a title.
-export const getDetailTitle = async (movieID, apiType = '/movie') => {
+export const getDetailTitle = async (movieID, apiType = "/movie") => {
   const header = {
     api_key: API_KEY,
-    language: defaults.language,
+    language: defaults.language
   };
 
   const title = await axios({
     url: `${API_URL}${apiType}/${movieID}`,
-    params: header,
+    params: header
   });
 
   return title.data;
 };
 
 // builds link to poster
-export const getPosterURL = (posterPath, size = 'w500') => `https://image.tmdb.org/t/p/${size}${posterPath}`;
+export const getPosterURL = (posterPath, size = "w500") =>
+  `https://image.tmdb.org/t/p/${size}${posterPath}`;
 
 // return a list of search specific titles.
-export const getSpecificTitles = async (searchStr) => {
+export const getSpecificTitles = async searchStr => {
   const header = {
     ...defaults,
-    query: searchStr,
+    query: searchStr
   };
 
   const data = await axios({
-    url: 'https://api.themoviedb.org/3/search/movie',
-    params: header,
+    url: "https://api.themoviedb.org/3/search/movie",
+    params: header
   });
   return data.data.results;
 };
@@ -81,16 +85,18 @@ export const getSpecificTitles = async (searchStr) => {
 export const getUpcomingTitles = async (page = 1) => {
   const today = new Date();
   const todayISOFormat = today.toISOString(); // "2019-06-26T19:06:26.942Z"
-  const todayISO = todayISOFormat.split('T')[0]; // "2019-06-26"
+  const todayISO = todayISOFormat.split("T")[0]; // "2019-06-26"
 
   const response = await axios({
-    url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&region=US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=${todayISO}&release_date.gte=${todayISO}`,
+    url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&region=US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=${page}&primary_release_date.gte=${todayISO}&release_date.gte=${todayISO}`
   });
 
   const totalPages = response.data.total_pages;
-  const upcomingTitles = response.data.results.filter(title => title.release_date >= todayISO);
+  const upcomingTitles = response.data.results.filter(
+    title => title.release_date >= todayISO
+  );
 
-  return { results: removeDuplicates(upcomingTitles, 'id'), totalPages };
+  return { results: removeDuplicates(upcomingTitles, "id"), totalPages };
 };
 
 /*
@@ -101,9 +107,9 @@ export const getUpcomingTitles = async (page = 1) => {
  * @return: array of objects.
  *
  */
-export const getVideosFromMovie = async (titleID) => {
+export const getVideosFromMovie = async titleID => {
   const videosResponse = await axios({
-    url: `https://api.themoviedb.org/3/movie/${titleID}/videos?api_key=${API_KEY}`,
+    url: `https://api.themoviedb.org/3/movie/${titleID}/videos?api_key=${API_KEY}`
   });
 
   return videosResponse.data.results;

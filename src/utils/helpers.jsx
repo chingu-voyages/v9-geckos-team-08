@@ -3,7 +3,7 @@
  *
  *  @return: array of objects.
  */
-export const sortTitleAsc = (titles) => {
+export const sortTitleAsc = titles => {
   const sortedTitles = titles;
 
   for (let i = 1; i < sortedTitles.length; i += 1) {
@@ -29,23 +29,29 @@ export const removeDuplicates = (originalArray, prop) => {
     lookupObject[originalArray[ind][prop]] = originalArray[ind];
   }
 
-  Object.keys(lookupObject).forEach((key) => {
+  Object.keys(lookupObject).forEach(key => {
     newArray.push(lookupObject[key]);
   });
 
   return newArray;
 };
 
-export const assignYoutubeTrailer = (videos) => {
-  const YOUTUBE_URLBASE = 'https://www.youtube.com/embed/';
+export const assignYoutubeTrailer = videos => {
+  const YOUTUBE_URLBASE = "https://www.youtube.com/embed/";
 
   if (videos.length === 0) {
-    return '';
+    return "";
   }
 
-  const validVideos = videos.filter(video => video.site.toLowerCase() === 'youtube');
-  const trailers = validVideos.filter(video => video.type.toLowerCase() === 'trailer');
-  const teasers = validVideos.filter(video => video.type.toLowerCase() === 'teaser');
+  const validVideos = videos.filter(
+    video => video.site.toLowerCase() === "youtube"
+  );
+  const trailers = validVideos.filter(
+    video => video.type.toLowerCase() === "trailer"
+  );
+  const teasers = validVideos.filter(
+    video => video.type.toLowerCase() === "teaser"
+  );
 
   if (trailers.length !== 0) {
     return YOUTUBE_URLBASE + trailers[0].key;
@@ -55,5 +61,5 @@ export const assignYoutubeTrailer = (videos) => {
     return YOUTUBE_URLBASE + teasers[0].key;
   }
 
-  return '';
+  return "";
 };

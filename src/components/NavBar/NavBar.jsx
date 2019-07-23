@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = () => ({
   appBar: {
-    marginBottom: 50,
+    marginBottom: 50
   },
   brandName: {
-    margin: '0 auto',
+    margin: "0 auto",
     paddingTop: 20,
-    paddingBottom: 20,
-  },
+    paddingBottom: 20
+  }
 });
 
 function NavBar(props) {
@@ -32,7 +32,7 @@ function NavBar(props) {
 
 NavBar.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(NavBar);

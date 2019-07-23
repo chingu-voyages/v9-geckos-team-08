@@ -1,9 +1,7 @@
-import React from 'react';
-import './App.css';
-import NextFlick from './components/NextFlick/NextFlick';
+import React from "react";
+import "./App.css";
+import NextFlick from "./components/NextFlick/NextFlick";
 
 export default function App() {
-  return (
-    <NextFlick />
-  );
+  return <NextFlick />;
 }

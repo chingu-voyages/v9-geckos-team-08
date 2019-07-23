@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Trailer from './Trailer';
+import React from "react";
+import ReactDOM from "react-dom";
+import Trailer from "./Trailer";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Trailer trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg" movieTitle="Child's Play (2019 film)" titleID={32452} />, div);
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(
+    <Trailer
+      trailerThumbnail="https://i.ytimg.com/vi/ZFy8ZgLd574/hqdefault.jpg"
+      movieTitle="Child's Play (2019 film)"
+      titleID={32452}
+    />,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

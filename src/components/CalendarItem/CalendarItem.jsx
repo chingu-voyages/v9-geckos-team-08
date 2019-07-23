@@ -1,31 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Modal from '@material-ui/core/Modal';
-import { withStyles } from '@material-ui/core/styles';
-import { getVideosFromMovie } from '../../utils/MoviesAPI';
-import * as HELPERS from '../../utils/helpers';
-import './CalendarItem.css';
+import React from "react";
+import PropTypes from "prop-types";
+import Modal from "@material-ui/core/Modal";
+import { withStyles } from "@material-ui/core/styles";
+import { getVideosFromMovie } from "../../utils/MoviesAPI";
+import * as HELPERS from "../../utils/helpers";
+import "./CalendarItem.css";
 
 const styles = theme => ({
   modal: {
-    width: '50vw',
-    height: '50vh',
-    transform: 'translate(50%, 50%)',
+    width: "50vw",
+    height: "50vh",
+    transform: "translate(50%, 50%)"
   },
   movie: {
     color: theme.palette.background.paper,
-    cursor: 'pointer',
-    userSelect: 'none',
+    cursor: "pointer",
+    userSelect: "none"
   },
   youtubeIframe: {
-    width: '100%',
-    height: '100%',
-  },
+    width: "100%",
+    height: "100%"
+  }
 });
 
 const CalendarItem = ({ classes, title, titleID }) => {
-  const convertIsoToDatetime = (ISOFormat) => {
-    const [yyyy, mm, dd] = ISOFormat.split('-');
+  const convertIsoToDatetime = ISOFormat => {
+    const [yyyy, mm, dd] = ISOFormat.split("-");
     return `${mm}-${dd}-${yyyy}`;
   };
 
@@ -39,11 +39,12 @@ const CalendarItem = ({ classes, title, titleID }) => {
     setOpen(false);
   };
 
-  const [videos, setVideos] = React.useState('');
+  const [videos, setVideos] = React.useState("");
 
   React.useEffect(() => {
-    getVideosFromMovie(titleID)
-      .then(candidateVideos => setVideos(HELPERS.assignYoutubeTrailer(candidateVideos)));
+    getVideosFromMovie(titleID).then(candidateVideos =>
+      setVideos(HELPERS.assignYoutubeTrailer(candidateVideos))
+    );
   }, [titleID]);
 
   return (
@@ -55,10 +56,7 @@ const CalendarItem = ({ classes, title, titleID }) => {
         {title.title}
         <span id="dates">{convertIsoToDatetime(title.release_date)}</span>
       </li>
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         <div className={classes.modal}>
           <iframe
             src={videos}
@@ -79,7 +77,7 @@ CalendarItem.propTypes = {
   classes: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   title: PropTypes.object.isRequired,
-  titleID: PropTypes.number.isRequired,
+  titleID: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(CalendarItem);

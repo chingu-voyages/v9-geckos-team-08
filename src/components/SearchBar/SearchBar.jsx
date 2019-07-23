@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './SearchBar.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "./SearchBar.css";
 
 const SearchBar = ({ updateList }) => {
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     const [input] = event.target.children;
@@ -21,7 +21,7 @@ const SearchBar = ({ updateList }) => {
 };
 
 SearchBar.propTypes = {
-  updateList: PropTypes.func.isRequired,
+  updateList: PropTypes.func.isRequired
 };
 
 export default SearchBar;
